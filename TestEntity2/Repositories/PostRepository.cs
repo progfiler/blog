@@ -38,5 +38,11 @@ namespace TestEntity2.Repositories
             this._context.Remove(post);
             this._context.SaveChanges();
         }
+
+        public void Update(Posts post)
+        {
+            this._context.Update(post);
+            this._context.SaveChanges();
+        }
     }
 }

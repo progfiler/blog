@@ -1,0 +1,64 @@
+﻿@model TestEntity2.Models.Posts
+@{
+    ViewData["Title"] = "Créer un article";
+}
+
+
+<div class="row">
+    <div class="col s12">
+        <h2>Créer un article</h2>
+        @Html.ActionLink("Retour à la liste des articles", "Index", "Posts")
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col s9">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            @Html.EditorFor(model => model.Title,
+                                                new { htmlAttributes = new { @class = "validate" }})
+                            @Html.LabelFor(model => model.Title)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            @Html.TextAreaFor(model => model.Content,
+                                                new { @class = "materialize-textarea" })
+                            @Html.LabelFor(model => model.Content)
+                        </div>
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="switch">
+                                <h6>Publier l'article ?</h6>
+                                <label>
+                                    Hors ligne
+                                    @Html.CheckBoxFor(model => model.Publish.Value)
+                                    <span class="lever"></span>
+                                    En ligne
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button class="waves-effect waves-light btn-large" 
+                                    asp-area="" 
+                                    asp-controller="Posts" 
+                                    asp-action="Edit" 
+                                    type="submit">
+                                Editer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -68,7 +68,8 @@ namespace TestEntity2.Controllers
         // GET: PostsController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Posts post = this._repo.Get(id);
+            return View(post);
         }
 
         // POST: PostsController/Edit/5
@@ -78,6 +79,18 @@ namespace TestEntity2.Controllers
         {
             try
             {
+                Posts post = this._repo.Get(id);
+                post.Title = collection["Title"];
+                post.Content = collection["Content"];
+                if (collection["Publish.Value"].Contains("true"))
+                {
+                    post.Publish = true;
+                }
+                else
+                {
+                    post.Publish = false;
+                }
+                this._repo.Update(post);
                 return RedirectToAction(nameof(Index));
             }
             catch
