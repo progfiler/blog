@@ -12,7 +12,11 @@
                 <h4 class="header">Mes super articles</h4>
             </div>
             <div class="col s6 right-align">
-                <a class="waves-effect waves-light btn">Ajouter un article</a>
+                @Html.ActionLink("Ajouter un article", 
+                                 "Create", 
+                                 "Posts", 
+                                 new { area = "" }, 
+                                 new { @class = "waves-effect waves-light btn" })
             </div>
         </div>
         @foreach (var post in ViewBag.Posts)

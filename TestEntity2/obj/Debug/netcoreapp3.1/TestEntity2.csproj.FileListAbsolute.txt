@@ -70,3 +70,4 @@ C:\Users\ib\source\repos\TestEntity2\TestEntity2\bin\Debug\netcoreapp3.1\System.
 C:\Users\ib\source\repos\TestEntity2\TestEntity2\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\Users\ib\source\repos\TestEntity2\TestEntity2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Index.cshtml.g.cs
+C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\Razor\Views\Posts\create.cshtml.g.cs

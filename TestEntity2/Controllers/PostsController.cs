@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TestEntity2.Models;
 using TestEntity2.Repositories;
 
 namespace TestEntity2.Controllers
@@ -43,6 +44,18 @@ namespace TestEntity2.Controllers
         {
             try
             {
+                Posts post = new Posts();
+                post.Title = collection["Title"];
+                post.Content = collection["Content"];
+                if (collection["Publish.Value"].Contains("true"))
+                {
+                    post.Publish = true;
+                }
+                else
+                {
+                    post.Publish = false;
+                }
+                this._repo.Create(post);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -21,5 +21,11 @@ namespace TestEntity2.Repositories
         {
             return this._context.Posts.ToList();
         }
+
+        public void Create(Posts post)
+        {
+            this._context.Add(post);
+            this._context.SaveChanges();
+        }
     }
 }

@@ -12,6 +12,6 @@ namespace TestEntity2.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public byte? Publish { get; set; }
+        public bool? Publish { get; set; }
     }
 }
