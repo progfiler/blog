@@ -28,6 +28,7 @@ namespace TestEntity2.Controllers
         // GET: PostsController/Details/5
         public ActionResult Details(int id)
         {
+            ViewBag.Post = this._repo.Get(id);
             return View();
         }
 
@@ -85,24 +86,20 @@ namespace TestEntity2.Controllers
             }
         }
 
-        // GET: PostsController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: PostsController/Delete/5
-        [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
+                Posts post = this._repo.Get(id);
+                this._repo.Delete(post);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
     }

@@ -46,6 +46,11 @@ namespace TestEntity2
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseHttpMethodOverride(new HttpMethodOverrideOptions
+            {
+                FormFieldName = HtmlHelperExtensions.HttpMethodOverrideFormName
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();

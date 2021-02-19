@@ -12,42 +12,80 @@
                 <h4 class="header">Mes super articles</h4>
             </div>
             <div class="col s6 right-align">
-                @Html.ActionLink("Ajouter un article", 
-                                 "Create", 
-                                 "Posts", 
-                                 new { area = "" }, 
+                @Html.ActionLink("Ajouter un article",
+                                 "Create",
+                                 "Posts",
+                                 new { area = "" },
                                  new { @class = "waves-effect waves-light btn" })
             </div>
         </div>
-        @foreach (var post in ViewBag.Posts)
-        {
-            <div class="card horizontal">
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <span class="card-title">@post.Title</span>
-                        <p>@post.Content.Substring(0, Math.Min(post.Content.Length, 50))...</p>
-                    </div>
-                    <div class="card-action">
-                        <div class="row">
-                            <div class="col s9">
-                                <a href="#">Lire la suite</a>
-                            </div>
 
-                     
-                            <div class="col s3">
-                                @if (post.Publish)
-                                {
-                                    <span class="new badge green" data-badge-caption="En ligne"></span>
-                                } 
-                                else
-                                {
-                                    <span class="new badge red" data-badge-caption="Hors ligne"></span>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Publié ?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var post in ViewBag.Posts)
+                {
+                <tr>
+                    <td>@post.Title</td>
+                    <td>@post.Content.Substring(0, Math.Min(post.Content.Length, 10))...</td>
+                    <td>
+                        @if (post.Publish)
+                        {
+                            <span class="new badge green" data-badge-caption="En ligne"></span>
+                        }
+                        else
+                        {
+                            <span class="new badge red" data-badge-caption="Hors ligne"></span>
+                        }
+                    </td>
+                    <td>
+
+                        <a class="waves-effect waves-light btn-small btn-floating green"
+                           asp-route-id="@post.Id"
+                           asp-area=""
+                           asp-controller="Posts"
+                           asp-action="Details">
+                            <i class="material-icons right">remove_red_eye</i>
+                        </a>
+
+                        <a class="waves-effect waves-light btn-small btn-floating blue"
+                           asp-route-id="@post.Id"
+                           asp-area=""
+                           asp-controller="Posts"
+                           asp-action="Edit">
+                            <i class="material-icons right">edit</i>
+                        </a>
+
+                   @using (Html.BeginForm(
+                     "Delete",
+                     "Posts",
+                     new { Id = post.Id },
+                     FormMethod.Post,
+                     true,
+                     new { @class = "form-inline" })
+                    )
+                        {
+                            @Html.HttpMethodOverride(System.Net.Http.HttpMethod.Delete)
+                            
+                            <button class="btn-small btn-floating red"
+                                    type="submit">
+                                <i class="material-icons right">delete</i>
+                            </button>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

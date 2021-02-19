@@ -22,9 +22,20 @@ namespace TestEntity2.Repositories
             return this._context.Posts.ToList();
         }
 
+        public Posts Get(int id)
+        {
+            return this._context.Posts.Find(id);
+        }
+
         public void Create(Posts post)
         {
             this._context.Add(post);
+            this._context.SaveChanges();
+        }
+
+        public void Delete(Posts post)
+        {
+            this._context.Remove(post);
             this._context.SaveChanges();
         }
     }
