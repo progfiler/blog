@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Mes articles";
+}
+
+<div class="row">
+    <div class="col s12 m12">
+        <div class="row valign-wrapper">
+            <div class="col s6">
+                <h4 class="header">Mes super articles</h4>
+            </div>
+            <div class="col s6 right-align">
+                <a class="waves-effect waves-light btn">Ajouter un article</a>
+            </div>
+        </div>
+        @foreach (var post in ViewBag.Posts)
+        {
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="card-title">@post.Title</span>
+                        <p>@post.Content.Substring(0, Math.Min(post.Content.Length, 50))...</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Lire la suite</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TestEntity2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <header>
+                <nav>
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo">Mon Super Blog</a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li>
+                                <a  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li>
+                                <a  asp-area="" asp-controller="Posts" asp-action="Index">Mes articles</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - TestEntity2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
