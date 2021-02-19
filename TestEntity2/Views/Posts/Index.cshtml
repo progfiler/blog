@@ -28,7 +28,23 @@
                         <p>@post.Content.Substring(0, Math.Min(post.Content.Length, 50))...</p>
                     </div>
                     <div class="card-action">
-                        <a href="#">Lire la suite</a>
+                        <div class="row">
+                            <div class="col s9">
+                                <a href="#">Lire la suite</a>
+                            </div>
+
+                     
+                            <div class="col s3">
+                                @if (post.Publish)
+                                {
+                                    <span class="new badge green" data-badge-caption="En ligne"></span>
+                                } 
+                                else
+                                {
+                                    <span class="new badge red" data-badge-caption="Hors ligne"></span>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
