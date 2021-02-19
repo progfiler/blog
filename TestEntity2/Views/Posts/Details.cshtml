@@ -6,8 +6,47 @@
 
 <div class="row">
     <div class="col s12">
+        $
         <h2>@ViewBag.Post.Title</h2>
-        @Html.ActionLink("Retour à la liste des articles", "Index", "Posts")
+        <div class="row">
+            <div class="col s10">
+                @Html.ActionLink("Retour à la liste des articles", "Index", "Posts")
+            </div>
+            <div class="col s2">
+                <a class="waves-effect waves-light btn-small btn-floating green"
+                   asp-route-id="@ViewBag.Post.Id"
+                   asp-area=""
+                   asp-controller="Posts"
+                   asp-action="Details">
+                    <i class="material-icons right">remove_red_eye</i>
+                </a>
+
+                <a class="waves-effect waves-light btn-small btn-floating blue"
+                   asp-route-id="@ViewBag.Post.Id"
+                   asp-area=""
+                   asp-controller="Posts"
+                   asp-action="Edit">
+                    <i class="material-icons right">edit</i>
+                </a>
+
+                @using (Html.BeginForm(
+               "Delete",
+               "Posts",
+               new { Id = ViewBag.Post.Id },
+               FormMethod.Post,
+               true,
+               new { @class = "form-inline" })
+              )
+                {
+                    @Html.HttpMethodOverride(System.Net.Http.HttpMethod.Delete)
+
+                    <button class="btn-small btn-floating red"
+                            type="submit">
+                        <i class="material-icons right">delete</i>
+                    </button>
+                }
+            </div>
+        </div>
         <hr />
         <p>@ViewBag.Post.Content</p>
     </div>

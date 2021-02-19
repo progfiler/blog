@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TestEntity2.Models;
 using TestEntity2.Repositories;
 
@@ -56,7 +54,9 @@ namespace TestEntity2.Controllers
                 {
                     post.Publish = false;
                 }
-                this._repo.Create(post);
+                int isSave = this._repo.Create(post);
+                TempData["isSave"] = isSave;
+                TempData["message"] = "L'article a bien été sauvegardé";
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -90,7 +90,9 @@ namespace TestEntity2.Controllers
                 {
                     post.Publish = false;
                 }
-                this._repo.Update(post);
+                int isUpdate = this._repo.Update(post);
+                TempData["isSave"] = isUpdate;
+                TempData["message"] = "L'article a bien été édité";
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -99,6 +101,23 @@ namespace TestEntity2.Controllers
             }
         }
 
+        // GET: PostsController/Publish/5/isPublish
+        public ActionResult Publish(int id, bool publish)
+        {
+            try
+            {
+                Posts post = this._repo.Get(id);
+                post.Publish = publish;
+                int isUpdate = this._repo.Update(post);
+                TempData["isSave"] = isUpdate;
+                TempData["message"] = "L'article a bien été publié";
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
         // POST: PostsController/Delete/5
         [HttpDelete]
         [ValidateAntiForgeryToken]
@@ -107,7 +126,9 @@ namespace TestEntity2.Controllers
             try
             {
                 Posts post = this._repo.Get(id);
-                this._repo.Delete(post);
+                int isDelete = this._repo.Delete(post);
+                TempData["isSave"] = isDelete;
+                TempData["message"] = "L'article a bien été supprimé";
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -19,7 +19,7 @@ namespace TestEntity2.Repositories
 
         public List<Posts> GetAll()
         {
-            return this._context.Posts.ToList();
+            return this._context.Posts.OrderByDescending(p => p.Id).ToList();
         }
 
         public Posts Get(int id)
@@ -27,22 +27,22 @@ namespace TestEntity2.Repositories
             return this._context.Posts.Find(id);
         }
 
-        public void Create(Posts post)
+        public int Create(Posts post)
         {
             this._context.Add(post);
-            this._context.SaveChanges();
+            return this._context.SaveChanges();
         }
 
-        public void Delete(Posts post)
+        public int Delete(Posts post)
         {
             this._context.Remove(post);
-            this._context.SaveChanges();
+            return this._context.SaveChanges();
         }
 
-        public void Update(Posts post)
+        public int Update(Posts post)
         {
             this._context.Update(post);
-            this._context.SaveChanges();
+            return this._context.SaveChanges();
         }
     }
 }
