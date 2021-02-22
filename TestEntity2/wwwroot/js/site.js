@@ -5,7 +5,6 @@
 
 M.AutoInit();
 
-
 const toastComponent = document.querySelector("#toastComponent")
 if (toastComponent) {
     const isSave = toastComponent.getAttribute("data-save")
@@ -29,4 +28,29 @@ if (jsDeletePosts.length > 0) {
             }
         })
     })
-} 
+}
+// Start filter 
+const categoryFilter = document.querySelector("#jsFilter")
+const categoryFilterInstance = M.FormSelect.getInstance(categoryFilter)
+const cards = document.querySelectorAll(".jsPostCard")
+categoryFilter.addEventListener('change', () => {
+    const categories = categoryFilterInstance.getSelectedValues()
+    fetch(`https://localhost:44349/Filtered?ids=${categories.toString()}`)
+        .then(response => response.json())
+        .then(json => {
+            const arrayOfId = []
+            json.forEach(j => {
+                arrayOfId.push(j.id)
+            })
+            cards.forEach(card => {
+                let id = card.getAttribute("data-id")
+                if (arrayOfId.includes(parseInt(id))) {
+                    card.style.display = "block"
+                } else {
+                    card.style.display = "none"
+                }
+            })
+        })
+})
+
+

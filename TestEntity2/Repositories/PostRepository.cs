@@ -49,10 +49,27 @@ namespace TestEntity2.Repositories
             return this._context.SaveChanges();
         }
 
+        internal List<Posts> GetFilteredPosts(List<int> category_ids)
+        {
+            return this._context.Posts
+               .Select(p => new Posts{ Id = p.Id, CategoryId = p.CategoryId, Publish = p.Publish })
+               .Where(p => category_ids.Contains((int)p.CategoryId))
+               .Where(p => p.Publish == true)
+               .ToList();
+        }
+
         public int Delete(Posts post)
         {
             this._context.Remove(post);
             return this._context.SaveChanges();
+        }
+
+        internal List<Posts> GetFilteredALlPosts()
+        {
+            return this._context.Posts
+              .Select(p => new Posts { Id = p.Id, CategoryId = p.CategoryId, Publish = p.Publish })
+              .Where(p => p.Publish == true)
+              .ToList();
         }
 
         public int Update(Posts post)

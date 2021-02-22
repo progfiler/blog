@@ -7,20 +7,21 @@
 </div>
 <div class="row">
     <div class="col s4 offset-s8">
-        <select>
+        <select id="jsFilter" multiple>
             <option value="" disabled selected>Filtrer par catégorie</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category.Id">@category.Title</option>
+            }
         </select>
         <label>Materialize Select</label>
     </div>
 </div>
 <div class="row">
-    <div class="col s12">
+    <div class="col s12" id="jsCards">
         @foreach (var post in ViewBag.Posts)
         {
-            <div class="card">
+            <div class="card jsPostCard" data-id="@post.Id">
                 <div class="card-content">
                     <div class="chip right">
                         @post.Category.Title
