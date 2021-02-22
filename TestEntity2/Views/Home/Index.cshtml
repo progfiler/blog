@@ -2,7 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <h1 class="display-4">Bienvenue sur mon Blog</h1>
+</div>
+<div class="row">
+    <div class="col s12">
+        @foreach (var post in ViewBag.Posts)
+        {
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">@post.Title</span>
+                    <p>
+                        @post.Content.Substring(0, Math.Min(post.Content.Length, 250))...
+                    </p>
+                </div>
+                <div class="card-action">
+                    <a
+                       asp-route-id="@post.Id"
+                       asp-area=""
+                       asp-controller="Home"
+                       asp-action="Details">
+                        Lire la suite
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
 </div>

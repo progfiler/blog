@@ -27,6 +27,14 @@ namespace TestEntity2.Repositories
             return this._context.Posts.Find(id);
         }
 
+        public List<Posts> GetPublish()
+        {
+            return this._context.Posts
+                .Where(p => p.Publish == true)
+                .OrderByDescending(p => p.Id)
+                .ToList();
+        }
+
         public int Create(Posts post)
         {
             this._context.Add(post);
