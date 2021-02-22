@@ -4,7 +4,7 @@
 // Write your JavaScript code.
 
 
-const toastComponent = document.querySelector("#toastComponent")
+const toastComponent = document.querySelector(".toastComponent")
 if (toastComponent) {
     const isSave = toastComponent.getAttribute("data-save")
     if (isSave) {
@@ -16,3 +16,16 @@ if (toastComponent) {
     }
 }
 
+// Toggle Msg when delete Action 
+const jsDeletePosts = document.querySelectorAll(".jsDeletePosts")
+console.log(jsDeletePosts)
+if (jsDeletePosts.length > 0) {
+    jsDeletePosts.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const del = confirm("Voulez-vous vraiment supprimer cet article ?")
+            if (!del) {
+                e.preventDefault()
+            }
+        })
+    })
+} 
