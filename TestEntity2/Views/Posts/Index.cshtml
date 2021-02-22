@@ -41,7 +41,11 @@
                         <tr>
                             <td>@post.Title</td>
                             <td>@post.Content.Substring(0, Math.Min(post.Content.Length, 10))...</td>
-                            <td>@post.Category.Title</td>
+                            <td>
+                                <div class="chip">
+                                    @post.Category.Title
+                                </div>
+                            </td>
                             <td>
 
                                 @if (post.Publish)

@@ -6,11 +6,25 @@
     <h1 class="display-4">Bienvenue sur mon Blog</h1>
 </div>
 <div class="row">
+    <div class="col s4 offset-s8">
+        <select>
+            <option value="" disabled selected>Filtrer par catégorie</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+        <label>Materialize Select</label>
+    </div>
+</div>
+<div class="row">
     <div class="col s12">
         @foreach (var post in ViewBag.Posts)
         {
             <div class="card">
                 <div class="card-content">
+                    <div class="chip right">
+                        @post.Category.Title
+                    </div>
                     <span class="card-title">@post.Title</span>
                     <p>
                         @post.Content.Substring(0, Math.Min(post.Content.Length, 250))...

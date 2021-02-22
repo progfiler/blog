@@ -12,6 +12,7 @@ namespace TestEntity2.Controllers
         private readonly PostRepository _repo;
         private readonly CategoryRepository _repoCategory;
 
+
         public PostsController(PostRepository repo, CategoryRepository repoCategory)
         {
             _repo = repo;

@@ -28,13 +28,17 @@ namespace TestEntity2.Repositories
 
         public Posts Get(int id)
         {
-            return this._context.Posts.Find(id);
+            return this._context.Posts
+                .Where(p => p.Id == id)
+                .Include(p => p.Category)
+                .First();
         }
 
         public List<Posts> GetPublish()
         {
             return this._context.Posts
                 .Where(p => p.Publish == true)
+                .Include(p => p.Category)
                 .OrderByDescending(p => p.Id)
                 .ToList();
         }
