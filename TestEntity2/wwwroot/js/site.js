@@ -3,15 +3,16 @@
 
 // Write your JavaScript code.
 
+M.AutoInit();
 
-const toastComponent = document.querySelector(".toastComponent")
+
+const toastComponent = document.querySelector("#toastComponent")
 if (toastComponent) {
     const isSave = toastComponent.getAttribute("data-save")
     if (isSave) {
         if (isSave > 0) {
             const message = toastComponent.getAttribute("data-message")
             M.toast({ html: message })
-
         }
     }
 }

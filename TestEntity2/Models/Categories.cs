@@ -7,13 +7,16 @@ using System.Collections.Generic;
 
 namespace TestEntity2.Models
 {
-    public partial class Posts
+    public partial class Categories
     {
+        public Categories()
+        {
+            Posts = new HashSet<Posts>();
+        }
+
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
-        public bool? Publish { get; set; }
-        public int? CategoryId { get; set; }
-        public virtual Categories Category { get; set; }
+
+        public virtual ICollection<Posts> Posts { get; set; }
     }
 }

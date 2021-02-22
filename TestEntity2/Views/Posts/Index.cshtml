@@ -4,101 +4,120 @@
 @{
     ViewData["Title"] = "Mes articles";
 }
-<div class="row">
-    <div class="col s12 m12">
-        <div class="row valign-wrapper">
-            <div class="col s6">
-                <h4 class="header">Mes super articles</h4>
-            </div>
-            <div class="col s6 right-align">
-                @Html.ActionLink("Ajouter un article",
-                                 "Create",
-                                 "Posts",
-                                 new { area = "" },
-                                 new { @class = "waves-effect waves-light btn" })
-            </div>
-        </div>
-
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Publier</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                @foreach (var post in ViewBag.Posts)
-                {
-                <tr>
-                    <td>@post.Title</td>
-                    <td>@post.Content.Substring(0, Math.Min(post.Content.Length, 10))...</td>
-                    <td>
-
-                        @if (post.Publish)
-                        {
-                            <a asp-route-id="@post.Id"
-                               asp-route-publish="false"
-                               asp-area=""
-                               asp-controller="Posts"
-                               asp-action="Publish">
-                                <span class="new badge green" data-badge-caption="En ligne"></span>
-                            </a>
-                        }
-                        else
-                        {
-                            <a asp-route-id="@post.Id"
-                               asp-route-publish="true"
-                               asp-area=""
-                               asp-controller="Posts"
-                               asp-action="Publish">
-                                <span class="new badge red" data-badge-caption="Hors ligne"></span>
-                                </a>
-                        }
-                        </td>
-                    <td>
-
-                        <a class="waves-effect waves-light btn-small btn-floating green"
-                           asp-route-id="@post.Id"
-                           asp-area=""
-                           asp-controller="Posts"
-                           asp-action="Details">
-                            <i class="material-icons right">remove_red_eye</i>
-                        </a>
-
-                        <a class="waves-effect waves-light btn-small btn-floating blue"
-                           asp-route-id="@post.Id"
-                           asp-area=""
-                           asp-controller="Posts"
-                           asp-action="Edit">
-                            <i class="material-icons right">edit</i>
-                        </a>
-
-                   @using (Html.BeginForm(
-                     "Delete",
-                     "Posts",
-                     new { Id = post.Id },
-                     FormMethod.Post,
-                     true,
-                     new { @class = "form-inline" })
-                    )
-                        {
-                            @Html.HttpMethodOverride(System.Net.Http.HttpMethod.Delete)
-                            
-                            <button class="btn-small btn-floating red jsDeletePosts"
-                                    type="submit">
-                                <i class="material-icons right">delete</i>
-                            </button>
-                        }
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
 <span data-save="@TempData["isSave"]" data-message="@TempData["message"]" id="toastComponent"></span>
+@if (ViewBag.Posts.Count > 0)
+{
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="row valign-wrapper">
+                <div class="col s6">
+                    <h4 class="header">Mes super articles</h4>
+                </div>
+                <div class="col s6 right-align">
+                    @Html.ActionLink("Ajouter un article",
+                                     "Create",
+                                     "Posts",
+                                     new { area = "" },
+                                     new { @class = "waves-effect waves-light btn" })
+                </div>
+            </div>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Publier</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var post in ViewBag.Posts)
+                    {
+                        <tr>
+                            <td>@post.Title</td>
+                            <td>@post.Content.Substring(0, Math.Min(post.Content.Length, 10))...</td>
+                            <td>
+
+                                @if (post.Publish)
+                                {
+                                    <a asp-route-id="@post.Id"
+                                       asp-route-publish="false"
+                                       asp-area=""
+                                       asp-controller="Posts"
+                                       asp-action="Publish">
+                                        <span class="new badge green" data-badge-caption="En ligne"></span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-route-id="@post.Id"
+                                       asp-route-publish="true"
+                                       asp-area=""
+                                       asp-controller="Posts"
+                                       asp-action="Publish">
+                                        <span class="new badge red" data-badge-caption="Hors ligne"></span>
+                                    </a>
+                                }
+                            </td>
+                            <td>
+
+                                <a class="waves-effect waves-light btn-small btn-floating green"
+                                   asp-route-id="@post.Id"
+                                   asp-area=""
+                                   asp-controller="Posts"
+                                   asp-action="Details">
+                                    <i class="material-icons right">remove_red_eye</i>
+                                </a>
+
+                                <a class="waves-effect waves-light btn-small btn-floating blue"
+                                   asp-route-id="@post.Id"
+                                   asp-area=""
+                                   asp-controller="Posts"
+                                   asp-action="Edit">
+                                    <i class="material-icons right">edit</i>
+                                </a>
+
+                                @using (Html.BeginForm(
+                               "Delete",
+                               "Posts",
+                               new { Id = post.Id },
+                               FormMethod.Post,
+                               true,
+                               new { @class = "form-inline" })
+                              )
+                                {
+                                    @Html.HttpMethodOverride(System.Net.Http.HttpMethod.Delete)
+
+                                    <button class="btn-small btn-floating red jsDeletePosts"
+                                            type="submit">
+                                        <i class="material-icons right">delete</i>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row" style="margin-top: 50px;">
+        <div class="col s6 offset-s3" style="text-align: center">
+            <img class="responsive-img" src="~/img/oups.png" />
+            <p>
+                Ouupppss, vous n'avez pas encore écrits d'articles
+            </p>
+            <p>
+                @Html.ActionLink("Commencer à écrire votre premier article !",
+                              "Create",
+                              "Posts")
+            </p>
+        </div>
+    </div>
+}

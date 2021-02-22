@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestEntity2.contexts;
+using TestEntity2.Contexts;
 using TestEntity2.Repositories;
 
 namespace TestEntity2
@@ -27,6 +27,7 @@ namespace TestEntity2
         {
             services.AddDbContext<testentityContext>();
             services.AddScoped<PostRepository, PostRepository>();
+            services.AddScoped<CategoryRepository, CategoryRepository>();
             services.AddControllersWithViews();
         }
 

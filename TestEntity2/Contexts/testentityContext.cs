@@ -7,7 +7,7 @@ using TestEntity2.Models;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace TestEntity2.contexts
+namespace TestEntity2.Contexts
 {
     public partial class testentityContext : DbContext
     {
@@ -20,6 +20,7 @@ namespace TestEntity2.contexts
         {
         }
 
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,13 +34,35 @@ namespace TestEntity2.contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Posts>(entity =>
+            modelBuilder.Entity<Categories>(entity =>
             {
-                entity.ToTable("posts");
+                entity.ToTable("categories");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("title")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<Posts>(entity =>
+            {
+                entity.ToTable("posts");
+
+                entity.HasIndex(e => e.CategoryId)
+                    .HasName("FK_category_idx");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.CategoryId)
+                    .HasColumnName("category_id")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
 
                 entity.Property(e => e.Content)
                     .HasColumnName("content")
@@ -55,6 +78,11 @@ namespace TestEntity2.contexts
                     .HasColumnName("title")
                     .HasMaxLength(255)
                     .HasDefaultValueSql("'NULL'");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("FK_category");
             });
 
             OnModelCreatingPartial(modelBuilder);

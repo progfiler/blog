@@ -10,10 +10,12 @@ namespace TestEntity2.Controllers
     public class PostsController : Controller
     {
         private readonly PostRepository _repo;
+        private readonly CategoryRepository _repoCategory;
 
-        public PostsController(PostRepository repo)
+        public PostsController(PostRepository repo, CategoryRepository repoCategory)
         {
             _repo = repo;
+            _repoCategory = repoCategory;
         }
 
         // GET: PostsController
@@ -33,6 +35,7 @@ namespace TestEntity2.Controllers
         // GET: PostsController/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = this._repoCategory.GetAll();
             return View();
         }
 
@@ -46,6 +49,7 @@ namespace TestEntity2.Controllers
                 Posts post = new Posts();
                 post.Title = collection["Title"];
                 post.Content = collection["Content"];
+                post.CategoryId = Convert.ToInt32(collection["Category"]);
                 if (collection["Publish.Value"].Contains("true"))
                 {
                     post.Publish = true;

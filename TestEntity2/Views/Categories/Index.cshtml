@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Mes catégories";
+}
+<span data-save="@TempData["isSave"]" data-message="@TempData["message"]" id="toastComponent"></span>
+@if (ViewBag.Categories.Count > 0)
+{
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="row valign-wrapper">
+                <div class="col s6">
+                    <h4 class="header">Mes catégories</h4>
+                </div>
+                <div class="col s6 right-align">
+                    @Html.ActionLink("Ajouter une catégorie",
+                                     "Create",
+                                     "Categories",
+                                     new { area = "" },
+                                     new { @class = "waves-effect waves-light btn" })
+                </div>
+            </div>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <tr>
+                            <td>@category.Title</td>
+                            <td>
+
+                                <a class="waves-effect waves-light btn-small btn-floating blue"
+                                   asp-route-id="@category.Id"
+                                   asp-area=""
+                                   asp-controller="Categories"
+                                   asp-action="Edit">
+                                    <i class="material-icons right">edit</i>
+                                </a>
+
+                                @using (Html.BeginForm(
+                              "Delete",
+                              "Categories",
+                              new { Id = category.Id },
+                              FormMethod.Post,
+                              true,
+                              new { @class = "form-inline" })
+                             )
+                                {
+                                    @Html.HttpMethodOverride(System.Net.Http.HttpMethod.Delete)
+
+                                    <button class="btn-small btn-floating red jsDeletePosts"
+                                            type="submit">
+                                        <i class="material-icons right">delete</i>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row" style="margin-top: 50px;">
+        <div class="col s6 offset-s3" style="text-align: center">
+            <img class="responsive-img" src="~/img/oups.png" />
+            <p>
+                Ouupppss, vous n'avez pas encore de catégories
+            </p>
+            <p>
+                @Html.ActionLink("Ajouter votre première catégories ! ",
+                              "Create",
+                              "Categories")
+            </p>
+        </div>
+    </div>
+}

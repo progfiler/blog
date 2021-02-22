@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestEntity2.contexts;
+using TestEntity2.Contexts;
 using TestEntity2.Models;
 
 namespace TestEntity2.Repositories
