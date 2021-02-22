@@ -28,6 +28,7 @@
                     <tr>
                         <th>Titre</th>
                         <th>Description</th>
+                        <th>Catégorie</th>
                         <th>Publier</th>
                         <th>Actions</th>
                     </tr>
@@ -40,6 +41,7 @@
                         <tr>
                             <td>@post.Title</td>
                             <td>@post.Content.Substring(0, Math.Min(post.Content.Length, 10))...</td>
+                            <td>@post.Category.Title</td>
                             <td>
 
                                 @if (post.Publish)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,10 @@ namespace TestEntity2.Repositories
 
         public List<Posts> GetAll()
         {
-            return this._context.Posts.OrderByDescending(p => p.Id).ToList();
+            return this._context.Posts
+                    .Include(p => p.Category)
+                    .OrderByDescending(p => p.Id)
+                    .ToList();
         }
 
         public Posts Get(int id)

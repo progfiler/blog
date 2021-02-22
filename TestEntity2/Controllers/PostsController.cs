@@ -73,6 +73,7 @@ namespace TestEntity2.Controllers
         public ActionResult Edit(int id)
         {
             Posts post = this._repo.Get(id);
+            ViewBag.Categories = this._repoCategory.GetAll();
             return View(post);
         }
 
@@ -86,6 +87,7 @@ namespace TestEntity2.Controllers
                 Posts post = this._repo.Get(id);
                 post.Title = collection["Title"];
                 post.Content = collection["Content"];
+                post.CategoryId = Convert.ToInt32(collection["Category"]);
                 if (collection["Publish.Value"].Contains("true"))
                 {
                     post.Publish = true;

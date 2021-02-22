@@ -35,6 +35,25 @@
                 <div class="col s3">
                     <div class="row">
                         <div class="col s12">
+                            <select name="Category">
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    @if (category.Id == Model.CategoryId)
+                                    {
+                                        <option value="@category.Id" selected>@category.Title</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@category.Id">@category.Title</option>
+                                    }
+                                }
+                            </select>
+                            <label>Catégorie</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
                             <div class="switch">
                                 <h6>Publier l'article ?</h6>
                                 <label>
@@ -48,10 +67,10 @@
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <button class="waves-effect waves-light btn-large" 
-                                    asp-area="" 
-                                    asp-controller="Posts" 
-                                    asp-action="Edit" 
+                            <button class="waves-effect waves-light btn-large"
+                                    asp-area=""
+                                    asp-controller="Posts"
+                                    asp-action="Edit"
                                     type="submit">
                                 Editer
                             </button>
