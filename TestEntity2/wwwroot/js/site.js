@@ -9,10 +9,8 @@ const toastComponent = document.querySelector("#toastComponent")
 if (toastComponent) {
     const isSave = toastComponent.getAttribute("data-save")
     if (isSave) {
-        if (isSave > 0) {
             const message = toastComponent.getAttribute("data-message")
             M.toast({ html: message })
-        }
     }
 }
 
@@ -29,7 +27,8 @@ if (jsDeletePosts.length > 0) {
         })
     })
 }
-// Start filter 
+
+// Start filter
 const categoryFilter = document.querySelector("#jsFilter")
 const categoryFilterInstance = M.FormSelect.getInstance(categoryFilter)
 const cards = document.querySelectorAll(".jsPostCard")

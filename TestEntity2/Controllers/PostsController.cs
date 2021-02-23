@@ -51,6 +51,9 @@ namespace TestEntity2.Controllers
                 post.Title = collection["Title"];
                 post.Content = collection["Content"];
                 post.CategoryId = Convert.ToInt32(collection["Category"]);
+                post.Description = "toto";
+                post.AuthorId = 1;
+
                 if (collection["Publish.Value"].Contains("true"))
                 {
                     post.Publish = true;
@@ -66,6 +69,9 @@ namespace TestEntity2.Controllers
             }
             catch
             {
+                ViewBag.Categories = this._repoCategory.GetAll();
+                TempData["isSave"] = 0;
+                TempData["message"] = "Il y a eu une erreur sur la sauvegarde de l'article";
                 return View();
             }
         }
