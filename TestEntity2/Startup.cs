@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestEntity2.Contexts;
+using TestEntity2.Middlewares;
 using TestEntity2.Repositories;
 
 namespace TestEntity2
@@ -58,7 +59,7 @@ namespace TestEntity2
             app.UseRouting();
             app.UseAuthorization();
             app.UseSession();
-            //app.UseMyMiddleware();
+            app.UseAuthMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

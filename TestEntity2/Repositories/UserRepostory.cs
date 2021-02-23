@@ -32,6 +32,12 @@ namespace TestEntity2.Repositories
             this._context.Add(user);
             return this._context.SaveChanges();
         }
+
+        internal Users getByUsername(string username)
+        {
+            return this._context.Users.Where(u => u.Username == username).First();
+        }
+
         public int Delete(Users user)
         {
             this._context.Remove(user);

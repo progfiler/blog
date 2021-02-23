@@ -179,3 +179,4 @@ C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\TestEnt
 C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs
 C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\Razor\Views\Users\create.cshtml.g.cs
 C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\Razor\Views\Users\edit.cshtml.g.cs
+C:\Users\ib\source\repos\TestEntity2\TestEntity2\obj\Debug\netcoreapp3.1\Razor\Views\Auth\login.cshtml.g.cs

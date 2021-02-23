@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,18 +12,26 @@
 </head>
 <body>
     <header>
-        <!-- Dropdown Structure -->
-        <ul id="dropdown1" class="dropdown-content">
-            <li>
-                <a asp-area="" asp-controller="Posts" asp-action="Index">Mes articles</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Categories" asp-action="Index">Mes catégories</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Users" asp-action="Index">Mes utilisateurs</a>
-            </li>
-        </ul>
+        @if (Context.Session.GetInt32("userId") != null)
+        {
+            <ul id="dropdown1" class="dropdown-content">
+                <li>
+                    <a asp-area="" asp-controller="Posts" asp-action="Index">Mes articles</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Categories" asp-action="Index">Mes catégories</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Users" asp-action="Index">Mes utilisateurs</a>
+                </li>
+            </ul>
+
+            <ul id="dropdown2" class="dropdown-content">
+                <li>
+                    <a asp-area="" asp-controller="Auth" asp-action="Logout">Déconnexion</a>
+                </li>
+            </ul>
+        }
         <div class="navbar-fixed">
             <nav>
                 <div class="nav-wrapper">
@@ -30,13 +40,31 @@
                         <li>
                             <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li>
-                            <a class="dropdown-trigger"
-                               href="#!"
-                               data-target="dropdown1">
-                                <i class="material-icons right">settings_applications</i>
-                            </a>
-                        </li>
+                        @if (Context.Session.GetInt32("userId") != null)
+                        {
+                            <li>
+                                <a class="dropdown-trigger"
+                                   href="#!"
+                                   data-target="dropdown1">
+                                    <i class="material-icons right">settings_applications</i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-trigger"
+                                   href="#!"
+                                   data-target="dropdown2">
+                                    @Context.Session.GetString("userName")
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-area="" asp-controller="Auth" asp-action="Login">
+                                    <i class="material-icons right">account_circle</i>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>

@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TestEntity2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+
+
+
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div class="row">
+                <div class="col s12">
+                    <h1>Se connecter</h1>
+                </div>
+            </div>
+            <form method="post" asp-controller="auth" asp-action="login">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" name="username" type="text" class="validate">
+                        <label for="first_name">Nom d'utilisateur</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="password" name="password" class="validate">
+                        <label for="last_name">Mot de passe</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <button type="submit">Se connecter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
