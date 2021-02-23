@@ -5,6 +5,7 @@ using System.Linq;
 using TestEntity2.Models;
 using TestEntity2.Repositories;
 
+
 namespace TestEntity2.Controllers
 {
     public class PostsController : Controller
@@ -12,7 +13,7 @@ namespace TestEntity2.Controllers
         private readonly PostRepository _repo;
         private readonly CategoryRepository _repoCategory;
 
-
+   
         public PostsController(PostRepository repo, CategoryRepository repoCategory)
         {
             _repo = repo;

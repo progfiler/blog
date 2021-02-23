@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Mes utilisateurs";
+}
+<span data-save="@TempData["isSave"]" data-message="@TempData["message"]" id="toastComponent"></span>
+@if (ViewBag.Users.Count > 0)
+{
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="row valign-wrapper">
+                <div class="col s6">
+                    <h4 class="header">Mes utilisateurs</h4>
+                </div>
+                <div class="col s6 right-align">
+                    @Html.ActionLink("Ajouter un utilisateur",
+                                     "Create",
+                                     "Users",
+                                     new { area = "" },
+                                     new { @class = "waves-effect waves-light btn" })
+                </div>
+            </div>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var user in ViewBag.Users)
+                    {
+                        <tr>
+                            <td><img src="@user.ImageProfil" style="border-radius: 50%;"/></td>
+                            <td>@user.Username</td>
+                            <td>@user.Email</td>
+                            <td>
+
+                                <a class="waves-effect waves-light btn-small btn-floating blue"
+                                   asp-route-id="@user.Id"
+                                   asp-area=""
+                                   asp-controller="Users"
+                                   asp-action="Edit">
+                                    <i class="material-icons right">edit</i>
+                                </a>
+
+                                @using (Html.BeginForm(
+                             "Delete",
+                             "Users",
+                             new { Id = user.Id },
+                             FormMethod.Post,
+                             true,
+                             new { @class = "form-inline" })
+                            )
+                                {
+                                    @Html.HttpMethodOverride(System.Net.Http.HttpMethod.Delete)
+
+                                    <button class="btn-small btn-floating red jsDeletePosts"
+                                            type="submit">
+                                        <i class="material-icons right">delete</i>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row" style="margin-top: 50px;">
+        <div class="col s6 offset-s3" style="text-align: center">
+            <img class="responsive-img" src="~/img/oups.png" />
+            <p>
+                Ouupppss, vous n'avez pas encore d'utilisateurs'
+            </p>
+            <p>
+                @Html.ActionLink("Ajouter votre premier utilisateur ! ",
+                              "Create",
+                              "Users")
+            </p>
+        </div>
+    </div>
+}

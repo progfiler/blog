@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Http;
 
 <div class="row">
     <h1 class="display-4">Bienvenue sur mon Blog</h1>
@@ -32,8 +33,7 @@
                     </p>
                 </div>
                 <div class="card-action">
-                    <a
-                       asp-route-id="@post.Id"
+                    <a asp-route-id="@post.Id"
                        asp-area=""
                        asp-controller="Home"
                        asp-action="Details">

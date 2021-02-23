@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +29,9 @@ namespace TestEntity2
             services.AddDbContext<testentityContext>();
             services.AddScoped<PostRepository, PostRepository>();
             services.AddScoped<CategoryRepository, CategoryRepository>();
+            services.AddScoped<UserRepostory, UserRepostory>();
             services.AddControllersWithViews();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,8 +56,9 @@ namespace TestEntity2
             });
 
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseSession();
+            //app.UseMyMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
